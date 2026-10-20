@@ -1,0 +1,16 @@
+{
+  "name": "roundtable",
+  "version": "0.3.0",
+  "private": true,
+  "type": "module",
+  "description": "GPT와 Claude의 의견을 비교하는 원탁 AI 대화방",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "dev": "node preview-server.mjs",
+    "test": "node --test tests/core.test.mjs tests/server.test.mjs",
+    "build": "node build-static.mjs",
+    "build:server": "node build-server.mjs"
+  }
+}
