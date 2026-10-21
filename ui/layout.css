@@ -124,3 +124,21 @@
  .compose-bottom .primary{padding:9px 8px;font-size:11px}
  .composer textarea{font-size:13px}
 }
+/* Brand marks are centered in every avatar, independent of their original SVG size. */
+.avatar.brand-avatar{display:grid;place-items:center;overflow:hidden;border-radius:50%;line-height:0;flex-shrink:0}
+.avatar.brand-avatar img{display:block;width:72%;height:72%;object-fit:contain;object-position:center}
+.avatar.brand-gpt{background:#00a578!important;color:#fff!important}
+.avatar.brand-claude{background:#d97757!important;color:#fff!important}
+.avatar.brand-gemini{background:#eef3ff!important}
+.avatar.brand-grok{background:#111!important;color:#fff!important}
+.participant .remove-agent{flex-shrink:0;padding:4px;color:#8b7772;border-radius:5px}
+.participant .remove-agent:hover{background:#fff0eb;color:#ad4939}
+.participant .remove-agent svg{width:14px;height:14px}
+.participant{gap:8px;padding-right:0}
+.participant .status{margin-left:auto;font-size:8px}
+.quick-agents{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}
+.quick-agents .chip{flex:1;justify-content:center;white-space:nowrap;padding:7px;font-size:11px}
+.quick-agents .avatar,.returning-agents .avatar{width:24px;height:24px}
+.returning-agents{display:flex;gap:8px;flex-wrap:wrap}
+.returning-agents .chip{display:flex;align-items:center}
+.manage-agents{width:100%;justify-content:center}
