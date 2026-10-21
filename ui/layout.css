@@ -142,3 +142,6 @@
 .returning-agents{display:flex;gap:8px;flex-wrap:wrap}
 .returning-agents .chip{display:flex;align-items:center}
 .manage-agents{width:100%;justify-content:center}
+/* Existing custom Grok participants may retain an older saved tone. */
+.participant-panel .panel-heading:has(.brand-grok){background:#f5f2fc}
+.panel-heading .avatar.brand-avatar.brand-grok,.message-heading .avatar.brand-avatar.brand-grok{background:#111!important;color:#fff!important}
