@@ -96,3 +96,31 @@
  .composer{padding:8px 12px}
  .composer textarea{height:38px;min-height:38px}
 }
+/* Fit four AI histories and a compact composer into the desktop workspace. */
+.participant-panels{gap:10px;grid-auto-columns:calc((100% - (var(--panel-columns) - 1)*10px)/var(--panel-columns))}
+.participant-panels .panel-heading{padding:12px 10px;gap:8px}
+.participant-panels .panel-heading .avatar{width:28px;height:28px;font-size:21px}
+.participant-panels .panel-heading strong{font-size:16px}
+.participant-panels .panel-count{font-size:10px}
+.participant-panels .panel-scroll{padding:0 10px}
+.compose-wrap{padding-bottom:8px}
+.composer{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:9px 12px}
+.compose-top,.composer>.draft{grid-column:1/-1}
+.compose-top{gap:10px;min-width:0}
+.recipients{flex-wrap:nowrap;overflow-x:auto;min-width:0;scrollbar-width:thin}
+.recipient{flex-shrink:0;padding:4px 9px;font-size:11px}
+.compose-top>span{white-space:nowrap}
+.composer textarea{height:38px;min-height:38px;padding:7px 0;font-size:14px}
+.compose-bottom{align-self:end}
+.compose-bottom small{display:none}
+.compose-bottom .primary{padding:9px 12px;font-size:12px;white-space:nowrap}
+.footnote{margin-top:5px;font-size:9px;line-height:1.4}
+@media(min-width:761px) and (max-width:1000px){.participant-panels{grid-auto-columns:calc((100% - 10px)/2)}}
+@media(max-width:760px){
+ .participant-panels{grid-auto-columns:85%}
+ .composer{gap:3px 8px;padding:8px 10px}
+ .compose-top{align-items:center}
+ .compose-top>span{padding-top:0}
+ .compose-bottom .primary{padding:9px 8px;font-size:11px}
+ .composer textarea{font-size:13px}
+}
