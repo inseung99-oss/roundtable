@@ -142,8 +142,3 @@
 .returning-agents{display:flex;gap:8px;flex-wrap:wrap}
 .returning-agents .chip{display:flex;align-items:center}
 .manage-agents{width:100%;justify-content:center}
-/* Grok uses an obsidian header and the same portrait treatment as the participant list. */
-.panel-heading:has(.brand-grok){background:#0b0b0f;color:#fff;border-bottom-color:#0b0b0f}
-.panel-heading:has(.brand-grok) small,.panel-heading:has(.brand-grok) .panel-count{color:#d1d5db}
-
-.participant-panels .panel-heading .avatar.brand-grok{width:43px;height:43px}
