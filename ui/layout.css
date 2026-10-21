@@ -142,3 +142,6 @@
 .returning-agents{display:flex;gap:8px;flex-wrap:wrap}
 .returning-agents .chip{display:flex;align-items:center}
 .manage-agents{width:100%;justify-content:center}
+/* Grok keeps its black brand header, including participants added before this update. */
+.panel-heading:has(.brand-grok){background:#000;color:#fff;border-bottom-color:#000}
+.panel-heading:has(.brand-grok) small,.panel-heading:has(.brand-grok) .panel-count{color:#d1d5db}
