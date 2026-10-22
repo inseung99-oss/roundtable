@@ -40,3 +40,116 @@
 @media(max-width:1200px){.shell{grid-template-columns:215px minmax(0,1fr)}.rightbar{display:none}.rightbar.open{display:block;position:fixed;right:0;top:90px;bottom:0;width:280px;z-index:20;box-shadow:-10px 0 40px #26462b20}.sidebar{padding:25px 16px}.brand{font-size:23px}}
 @media(max-width:760px){.shell{grid-template-columns:minmax(0,1fr)}.sidebar{display:none}.sidebar.open{display:flex;position:fixed;inset:0 auto 0 0;width:min(280px,88vw);z-index:25;box-shadow:8px 0 40px #26462b30}.mobile-toggle{display:grid}.topbar{height:76px;min-height:76px;padding:0 12px;gap:8px}.topbar h1{font-size:21px}.crumb{font-size:9px}.top-actions{gap:0}.top-actions .pill{padding:5px 7px;font-size:9px}.top-actions .iconbtn{padding:6px}.feed{padding:14px 12px}.banner{margin:10px 12px 0;font-size:10px}.banner button{font-size:10px}.response-grid{grid-template-columns:minmax(0,1fr)}.message.user{padding:16px;margin-bottom:14px}.message.user .bubble{font-size:15px}.message.user .message-heading strong{font-size:18px}.message-heading strong{font-size:20px}.message-heading{padding:15px;min-height:75px}.bubble{font-size:14px}.compose-wrap{padding:0 10px 8px}.composer{padding:11px 12px}.compose-top{align-items:flex-start;gap:9px}.compose-top>span{padding-top:5px;white-space:nowrap}.recipients{gap:4px}.recipient{font-size:11px;padding:5px 9px}.compose-bottom small{display:none}.compose-bottom{justify-content:flex-end}.footnote{font-size:9px;line-height:1.5}.rightbar.open{top:76px;width:min(290px,90vw)}.pending{margin-left:0}.message-stamp{font-size:9px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+
+/* The workspace stays fixed; only the participant histories scroll vertically. */
+.main{overflow:hidden}
+.topbar,.banner,.compose-wrap{flex-shrink:0}
+.feed{min-height:0;overflow:hidden;display:grid;grid-template-rows:minmax(100px,28%) minmax(0,1fr);gap:16px;padding:16px 20px;scroll-behavior:auto}
+.participant-panel{display:flex;flex-direction:column;min-width:0;min-height:0;overflow:hidden;border:1px solid var(--line);border-radius:12px;background:#fcfefc}
+.proposer-panel{background:#f3f8f1;border-color:#d8e6d5}
+.panel-heading{display:flex;align-items:center;gap:12px;padding:14px 16px;flex-shrink:0;background:#eff8f3;border-bottom:1px solid var(--line)}
+.panel-heading strong{font-size:19px;letter-spacing:-.5px}
+.panel-heading small{display:block;font-size:11px;color:var(--muted);margin-top:3px}
+.panel-heading .avatar{width:40px;height:40px;border-radius:50%;font-size:26px}
+.tone-green .panel-heading .avatar{background:#00a578;color:#fff}
+.tone-orange .panel-heading{background:#fff4ed}
+.tone-orange .panel-heading .avatar{background:#f4774b!important;color:#fff!important}
+.tone-blue .panel-heading{background:#f0f4ff}
+.tone-purple .panel-heading{background:#f5f2fc}
+.proposer-panel .panel-heading{padding:10px 18px;background:transparent;color:#17632e}
+.proposer-panel .panel-heading .avatar{width:28px;height:28px;font-size:18px}
+.proposer-panel .panel-heading small{display:none}
+.panel-count{margin-left:auto;white-space:nowrap;font-size:11px;color:var(--muted)}
+.panel-scroll{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:contain;scrollbar-gutter:stable;padding:0 14px;scrollbar-width:thin;scrollbar-color:#b1c3b6 transparent}
+.panel-scroll:focus-visible{outline:2px solid #71977c;outline-offset:-3px}
+.participant-panels{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(240px,1fr);gap:12px;min-width:0;min-height:0;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;padding-bottom:4px;scrollbar-width:thin}
+.panel-scroll .message,.panel-scroll .message.user{margin:0;padding:14px 0;border:0;border-bottom:1px solid var(--line);border-radius:0;background:transparent;animation:none;overflow:visible}
+.panel-scroll .message:last-child{border-bottom:0}
+.panel-scroll .message-heading,.panel-scroll .message.user .message-heading{min-height:0;padding:0 0 8px;background:transparent}
+.panel-scroll .message-heading>.avatar,.panel-scroll .message-heading>div:not(.message-stamp){display:none}
+.panel-scroll .message-stamp{margin-left:0;flex-direction:row;align-items:center;flex-wrap:wrap;gap:6px}
+.panel-scroll .bubble,.panel-scroll .message.user .bubble{padding:0;font-size:14px;line-height:1.85}
+.proposer-panel .message.user .bubble{font-size:16px}
+.panel-scroll .message-actions{margin-top:12px;padding:0;gap:5px}
+.panel-scroll .pending{margin:12px 0;padding:12px;overflow-wrap:anywhere}
+.panel-empty{font-size:13px;line-height:1.8;color:var(--muted);padding:8px 0}
+@media(min-width:1700px){.feed{padding-left:24px;padding-right:24px}}
+@media(max-width:760px){
+ .feed{padding:10px 12px;gap:10px;grid-template-rows:minmax(88px,28%) minmax(0,1fr)}
+ .participant-panels{grid-auto-columns:85%;gap:10px;scroll-snap-type:x proximity}
+ .participant-panel{scroll-snap-align:start}
+ .panel-heading{padding:10px 12px;gap:9px}
+ .panel-heading strong{font-size:17px}
+ .panel-heading .avatar{width:32px;height:32px;font-size:23px}
+ .proposer-panel .panel-heading{padding:8px 12px}
+ .proposer-panel .message.user .bubble{font-size:14px}
+ .panel-scroll{padding:0 12px}
+ .footnote{max-height:28px;overflow:auto}
+}
+@media(max-height:650px){
+ .topbar{height:60px;min-height:60px}
+ .banner{margin-top:6px;padding-top:4px;padding-bottom:4px}
+ .feed{padding-top:8px;padding-bottom:8px;gap:8px;grid-template-rows:minmax(65px,26%) minmax(0,1fr)}
+ .panel-heading,.proposer-panel .panel-heading{padding:6px 12px}
+ .panel-heading .avatar{width:26px;height:26px;font-size:18px}
+ .panel-heading small,.crumb,.footnote{display:none}
+ .composer{padding:8px 12px}
+ .composer textarea{height:38px;min-height:38px}
+}
+/* Fit four AI histories and a compact composer into the desktop workspace. */
+.participant-panels{gap:10px;grid-auto-columns:calc((100% - (var(--panel-columns) - 1)*10px)/var(--panel-columns))}
+.participant-panels .panel-heading{padding:12px 10px;gap:8px}
+.participant-panels .panel-heading .avatar{width:28px;height:28px;font-size:21px}
+.participant-panels .panel-heading strong{font-size:16px}
+.participant-panels .panel-count{font-size:10px}
+.participant-panels .panel-scroll{padding:0 10px}
+.compose-wrap{padding-bottom:8px}
+.composer{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:9px 12px}
+.compose-top,.composer>.draft{grid-column:1/-1}
+.compose-top{gap:10px;min-width:0}
+.recipients{flex-wrap:nowrap;overflow-x:auto;min-width:0;scrollbar-width:thin}
+.recipient{flex-shrink:0;padding:4px 9px;font-size:11px}
+.compose-top>span{white-space:nowrap}
+.composer textarea{height:38px;min-height:38px;padding:7px 0;font-size:14px}
+.compose-bottom{align-self:end}
+.compose-bottom small{display:none}
+.compose-bottom .primary{padding:9px 12px;font-size:12px;white-space:nowrap}
+.footnote{margin-top:5px;font-size:9px;line-height:1.4}
+@media(min-width:761px) and (max-width:1000px){.participant-panels{grid-auto-columns:calc((100% - 10px)/2)}}
+@media(max-width:760px){
+ .participant-panels{grid-auto-columns:85%}
+ .composer{gap:3px 8px;padding:8px 10px}
+ .compose-top{align-items:center}
+ .compose-top>span{padding-top:0}
+ .compose-bottom .primary{padding:9px 8px;font-size:11px}
+ .composer textarea{font-size:13px}
+}
+/* Brand marks are centered in every avatar, independent of their original SVG size. */
+.avatar.brand-avatar{display:grid;place-items:center;overflow:hidden;border-radius:50%;line-height:0;flex-shrink:0}
+.avatar.brand-avatar img{display:block;width:72%;height:72%;object-fit:contain;object-position:center}
+.avatar.brand-gpt{background:#00a578!important;color:#fff!important}
+.avatar.brand-claude{background:#d97757!important;color:#fff!important}
+.avatar.brand-gemini{background:#eef3ff!important}
+.avatar.brand-grok{background:#111!important;color:#fff!important}
+.participant .remove-agent{flex-shrink:0;padding:4px;color:#8b7772;border-radius:5px}
+.participant .remove-agent:hover{background:#fff0eb;color:#ad4939}
+.participant .remove-agent svg{width:14px;height:14px}
+.participant{gap:8px;padding-right:0}
+.participant .status{margin-left:auto;font-size:8px}
+.quick-agents{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}
+.quick-agents .chip{flex:1;justify-content:center;white-space:nowrap;padding:7px;font-size:11px}
+.quick-agents .avatar,.returning-agents .avatar{width:24px;height:24px}
+.returning-agents{display:flex;gap:8px;flex-wrap:wrap}
+.returning-agents .chip{display:flex;align-items:center}
+.manage-agents{width:100%;justify-content:center}
+/* Existing custom Grok participants may retain an older saved tone. */
+.participant-panel .panel-heading:has(.brand-grok){background:#f5f2fc}
+.panel-heading .avatar.brand-avatar.brand-grok,.message-heading .avatar.brand-avatar.brand-grok{background:#111!important;color:#fff!important}
+.byok-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+dialog:has(.byok-grid){width:min(880px,94vw)}
+.byok-form label{margin:8px 0;gap:5px;font-size:12px}
+.byok-form input{padding:8px}.byok-form p{margin:7px 0}.byok-form h3{font-size:16px}
+.byok-form{border:1px solid var(--line);border-radius:12px;padding:16px;min-width:0}
+.byok-form h3{margin:0}.byok-form p,.byok-form a{font-size:12px}.byok-form input{width:100%;min-width:0}
+.byok-actions{display:flex;gap:8px;margin-top:14px}.key-result{color:#99422f;overflow-wrap:anywhere}
+@media(max-width:600px){.byok-grid{grid-template-columns:1fr}}

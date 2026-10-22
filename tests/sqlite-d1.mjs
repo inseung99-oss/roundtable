@@ -3,6 +3,7 @@ import {readFileSync} from 'node:fs';
 export function database(path=':memory:'){
  const db=new DatabaseSync(path);
  if(!db.prepare("SELECT name FROM sqlite_master WHERE name='workspaces'").get())db.exec(readFileSync(new URL('../drizzle/0000_roundtable.sql',import.meta.url),'utf8'));
+ db.exec(readFileSync(new URL('../drizzle/0001_byok.sql',import.meta.url),'utf8'));
  const api={
   prepare(sql){return {bind(...values){return {
    async first(){return db.prepare(sql).get(...values)||null},

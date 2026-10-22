@@ -20,3 +20,15 @@ test('ALL creates independent jobs; answers persist and remain isolated by owner
  await putState(db,'alice',{state:s,revision:1});assert.equal((await getState(db,'alice')).state.rooms[0].messages.length,1);await assert.rejects(putState(db,'alice',{state:s,revision:1}),e=>e.status===409);db.close();});
 test('cancellation and expiry prevent stale replies; expired claims can retry',async()=>{const db=database(),s=make(),r=s.rooms[0];r.requests=[makeRequest(r,'gpt',[],'question')];await putState(db,'u',{state:s,revision:0});const first=await claim(db,'u','gpt');await db.prepare('UPDATE jobs SET lease_until=0 WHERE owner=?').bind('u').run();await assert.rejects(reply(db,'u',{requestId:first.request.id,lease:first.lease,text:'late'}));const second=await claim(db,'u','gpt');assert.notEqual(first.lease,second.lease);r.requests[0].status='cancelled';await putState(db,'u',{state:s,revision:1});await assert.rejects(reply(db,'u',{requestId:second.request.id,lease:second.lease,text:'cancelled'}));assert.equal(await claim(db,'u','gpt'),null);db.close()});
 test('anonymous and cross-origin writes rejected; MCP discovery contains no private data',async()=>{const db=database();assert.equal((await handle(new Request('https://site/api/v1/state'),{DB:db})).status,401);assert.equal((await handle(new Request('https://site/api/v1/state',{method:'PUT',headers:{'oai-authenticated-user-id':'u','origin':'https://evil','content-type':'application/json'},body:'{}'}),{DB:db})).status,403);const m=await handle(new Request('https://site/mcp',{method:'POST',body:JSON.stringify({jsonrpc:'2.0',id:1,method:'tools/list'})}),{DB:db});assert.equal((await m.json()).result.tools.length,5);db.close()});
+
+test('removing an AI cancels its room lease while keeping other rooms available',async()=>{
+ const {removeParticipant}=await import('../ui/core.mjs');const db=database(),s=make();
+ s.rooms[0].participants=['gpt','claude'];const second={...structuredClone(s.rooms[0]),id:'second'};s.rooms.push(second);
+ for(const r of s.rooms)r.requests=[makeRequest(r,'gpt',[],'question')];
+ await putState(db,'u',{state:s,revision:0});const first=await claim(db,'u','gpt');
+ const affected=s.rooms.find(r=>r.id===first.request.roomId);removeParticipant(s,affected,'gpt');
+ await putState(db,'u',{state:s,revision:1});
+ await assert.rejects(reply(db,'u',{requestId:first.request.id,lease:first.lease,text:'late reply'}),e=>e.status===409);
+ const next=await claim(db,'u','gpt');assert.notEqual(next.request.roomId,affected.id);
+ const loaded=(await getState(db,'u')).state;assert.equal(loaded.rooms.find(r=>r.id===affected.id).requests[0].status,'cancelled');db.close();
+});
