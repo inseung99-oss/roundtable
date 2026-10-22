@@ -145,3 +145,11 @@
 /* Existing custom Grok participants may retain an older saved tone. */
 .participant-panel .panel-heading:has(.brand-grok){background:#f5f2fc}
 .panel-heading .avatar.brand-avatar.brand-grok,.message-heading .avatar.brand-avatar.brand-grok{background:#111!important;color:#fff!important}
+.byok-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+dialog:has(.byok-grid){width:min(880px,94vw)}
+.byok-form label{margin:8px 0;gap:5px;font-size:12px}
+.byok-form input{padding:8px}.byok-form p{margin:7px 0}.byok-form h3{font-size:16px}
+.byok-form{border:1px solid var(--line);border-radius:12px;padding:16px;min-width:0}
+.byok-form h3{margin:0}.byok-form p,.byok-form a{font-size:12px}.byok-form input{width:100%;min-width:0}
+.byok-actions{display:flex;gap:8px;margin-top:14px}.key-result{color:#99422f;overflow-wrap:anywhere}
+@media(max-width:600px){.byok-grid{grid-template-columns:1fr}}
